@@ -36,7 +36,7 @@ def cityreader(cities=[]):
             print(f'Before Check {results}')
             if results[0] != 'city':
                 print(f'After Check')
-                cities.append(City(results[0], results[1], results[2]))
+                cities.append(City(results[0], float(results[1]), float(results[2])))
     return cities
 
 
