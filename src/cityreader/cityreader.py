@@ -41,7 +41,6 @@ def cityreader(cities=[]):
 
 
 cityreader(cities)
-print(f'Number of Records Inserted: {len(cities)}')
 # Print the list of cities (name, lat, lon), 1 record per line.
 for c in cities:
     print(c)
@@ -81,9 +80,29 @@ for c in cities:
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
     # within will hold the cities that fall within the specified region
     within = []
-
+    if lat1 < lat2 and lon1 < lon2:
+        within = [x for x in cities if lat1 < x.lat < lat2 and lon1 < x.lon < lon2]
+    elif lat1 > lat2 and lon1 > lon2:
+        within = [x for x in cities if lat2 < x.lat < lat1 and lon2 < x.lon < lon1]
+    elif lat1 < lat2 and lon1 > lon2:
+        within = [x for x in cities if lat1 < x.lat < lat2 and lon2 < x.lon < lon1]
+    else:
+        within = [x for x in cities if lat2 < x.lat < lat1 and lon1 < x.lon < lon2]
     # TODO Ensure that the lat and lon valuse are all floats
     # Go through each city and check to see if it falls within
     # the specified coordinates.
 
     return within
+
+
+def main():
+    lat_lon_1 = input('-> Enter lat and long for first coordinate, example 33,-120')
+    lat_lon_2 = input('-> Enter lat and long for first coordinate, example 45,-100')
+    lat_lon_1 = lat_lon_1.split(',')
+    lat_lon_2 = lat_lon_2.split(',')
+    results = cityreader_stretch(float(lat_lon_1[0]), float(lat_lon_1[1]), float(lat_lon_2[0]), float(lat_lon_2[1]), cities)
+    print(results)
+
+
+if __name__ == '__main__':
+    main()
