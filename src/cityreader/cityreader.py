@@ -33,9 +33,7 @@ def cityreader(cities=[]):
     with open('cities.csv', mode='r') as csv_file:
         sanitized_list = [[x.split(',')[0], x.split(',')[3], x.split(',')[4]] for x in csv_file]
         for results in sanitized_list:
-            print(f'Before Check {results}')
             if results[0] != 'city':
-                print(f'After Check')
                 cities.append(City(results[0], float(results[1]), float(results[2])))
     return cities
 
